@@ -1,0 +1,2355 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="Udvash,Unmesh,Online Education,Online Exam,Online Class,Online Admission" />
+<meta name="author" content="Udvash-Unmesh Shikkha Poribar" />
+<meta name="application-name" content="Udvash-Unmesh Online Portal" />
+
+        <title>View Result - Udvash Unmesh Online v_16.116.16911</title>
+
+
+<!-- ----------------------------------------------------------------
+    Fonts load from google
+----------------------------------------------------------------- -->
+
+<link rel="icon" href="/Content/UmsTheme/assets/images/favicon.png" sizes="32x32">
+<link rel="icon" href="/Content/UmsTheme/assets/images/favicon.png" sizes="192x192">
+<link rel="apple-touch-icon" href="/Content/UmsTheme/assets/images/favicon.png">
+<meta name="msapplication-TileImage" content="/Content/UmsTheme/assets/images/favicon.png">
+
+<!-- ----------------------------------------------------------------
+    Fonts load from google
+----------------------------------------------------------------- -->
+
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,300&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<!-- ----------------------------------------------------------------
+    Page Stylesheets
+----------------------------------------------------------------- -->
+<!-- Bootstrap -->
+<link rel="stylesheet" type="text/css" href="/Content/UmsTheme/assets/lib/bootstrap/bootstrap.min.css">
+
+<!-- Bootstrap -->
+
+
+<!-- Fontawesome -->
+<link rel="stylesheet" type="text/css" href="/Content/UmsTheme/assets/lib/fontawesome/css/all.min.css">
+
+
+<!-- Skin -->
+<link rel="stylesheet" type="text/css" href="/Content/UmsTheme/assets/css/skin-udvash.css?v=16.116.16911">
+
+<!-- Style -->
+<link rel="stylesheet" type="text/css" href="/Content/UmsTheme/assets/css/style.css?v=16.116.16911">
+
+<!-- Custom -->
+<link rel="stylesheet" type="text/css" href="/Content/UmsTheme/assets/css/custom.css?v=16.116.16911">
+
+
+<!-- jQuery -->
+<script type="text/javascript" src="/Content/UmsTheme/assets/js/jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    //This block execute after every ajax call
+    //If the ajax call return login error then this
+    //function redirect the user to login page.
+    $(document).ajaxComplete(function (xhr, status) {
+        if (status.getResponseHeader("X-Responded-JSON") != null) {
+            var obj = jQuery.parseJSON(status.getResponseHeader("X-Responded-JSON"));
+            //console.log(obj.status);
+            //console.log(obj.headers['location']);
+            //console.log(obj.headers['location'].substr(0, obj.headers['location'].indexOf('?')));
+            if (obj.status == 401) {
+                //window.location.assign(obj.headers['location']);
+                window.location.assign(obj.headers['location'].substr(0, obj.headers['location'].indexOf('?')));
+            }
+        }
+    });
+
+    function mobileCheck(mobileNumber) {
+        mobileNumber = mobileNumber.replace(/\W+/g, "");
+        var chkVal = mobileNumber.match(/^(?:\+?88)?0?1[13-9]\d{8}$/);
+        if (chkVal != null) {
+            if (mobileNumber.length == 11) {
+                chkVal = '88' + chkVal;
+            }
+            else if (mobileNumber.length == 10) {
+                chkVal = '880' + chkVal;
+            }
+            var chkVal = mobileNumber.match(/^(?:\+?88)?01[13-9]\d{8}$/);
+            if (chkVal != null) {
+                if (mobileNumber.length == 11) {
+                    chkVal = '88' + chkVal;
+                }
+                else if (mobileNumber.length == 10) {
+                    chkVal = '880' + chkVal;
+                }
+            }
+            //alert(chkVal);
+        }
+        return chkVal;
+    }
+
+    function nickNameCheck(nickName) {
+        var chkVal = nickName.match(/^[a-zA-Z .-`]$/);
+        return chkVal;
+    }
+
+    //This function is used for remove other char without numeric for text field
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+
+    if (!String.prototype.trim) {
+        String.prototype.trim = function () {
+            return this.replace(/^\s+|\s+$/g, '');
+        };
+    }
+
+    function showErrorMessageBelowCtrl(ctrlId, message, show) {
+
+        var divHtml = '<div style="color:red;" id="' + ctrlId + '_err_div" >' + message + '</div>';
+
+        if (show == true) {
+            $('#' + ctrlId).addClass("highlight");
+            $('#' + ctrlId).after(divHtml);
+        } else {
+            $('#' + ctrlId).removeClass("highlight");
+            $('#' + ctrlId + '_err_div').remove();
+        }
+    }
+
+    function validateTextField(controlId, errorMessage) {
+
+        $(document).on("input propertychange", "#" + controlId, function (event) {
+
+            var value = $("#" + controlId).val().trim();
+
+            if (value.length == 0) {
+                showErrorMessageBelowCtrl(controlId, "", false);
+                showErrorMessageBelowCtrl(controlId, errorMessage, true);
+                return false;
+            } else {
+                showErrorMessageBelowCtrl(controlId, "", false);
+            }
+        });
+    }
+
+    function validateDropDownField(controlId, targetId, errorMessage) {
+
+        $(document).on("change", "#" + controlId, function (event) {
+
+            var val = $("#" + targetId).val();
+            if (val.length == 0) {
+                //showErrorMessageBelowCtrl(controlId, "", false);
+                showErrorMessageBelowCtrl(controlId, errorMessage, true);
+            } else {
+                showErrorMessageBelowCtrl(controlId, "", false);
+            }
+        });
+    }
+
+    function validateDropDownField(controlId, errorMessage) {
+
+        $(document).on("change", "#" + controlId, function (event) {
+
+            var val = $("#" + controlId).val();
+            if (val.length == 0) {
+                showErrorMessageBelowCtrl(controlId, "", false);
+                showErrorMessageBelowCtrl(controlId, errorMessage, true);
+            } else {
+                showErrorMessageBelowCtrl(controlId, "", false);
+            }
+        });
+    }
+
+    function validateListField(controlId, errorMessage) {
+
+        $(document).on("change", "#" + controlId, function (event) {
+            var val = $("#" + controlId).val();
+            if (val == null || val.length == 0) {
+                showErrorMessageBelowCtrl(controlId, "", false);
+                showErrorMessageBelowCtrl(controlId, errorMessage, true);
+            } else {
+                showErrorMessageBelowCtrl(controlId, "", false);
+            }
+        });
+    }
+
+    function scrollToElement(selector) {
+        var s = $(selector);
+        if (s != undefined)
+            $(document.body).scrollTop($(selector).offset().top - 120);
+    }
+
+    $(document).ready(function () {
+
+        $("select").change(function () {
+            if ($(this).val() != "") {
+                $(this).parent().find(".field-validation-error-count").remove();
+                $(this).next('span').empty();
+            }
+
+            else {
+                //$(this).parent().find(".field-validation-error-count").remove();
+                $(this).parent().remove("span");
+                $(this).parent().append("<span class='text-danger field-validation-error' style='color:red'></span>");
+            }
+        });
+
+        $(document).on("input propertychange", ".numbersOnly", function (event) {
+            var valStr = $(this).val();
+            var id = $(this).attr("id");
+            var val = parseInt(valStr);
+            showErrorMessageBelowCtrl(id, "", false);
+            if (isNaN(val)) {
+                $(this).val("");
+            }
+            else if (val < 0) {
+                $(this).val("");
+                showErrorMessageBelowCtrl(id, "Please enter valid amount", true);
+            } else {
+                $(this).val(val);
+            }
+        });
+    });
+</script>
+
+<style>
+    /* Chrome, Safari, Edge, Opera */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+</style>
+
+</head>
+<body class="uu-routine-page" data-project-root="/">
+
+<a class="scroll-to-top" href="javascript:void(0)">
+    <i class="fas fa-chevron-circle-up"></i>
+</a>
+
+<div class='uu-desible-body'></div>
+
+        <header id="topHeader">
+
+
+
+<div class="uu-header-wrapper">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-10 col-6 col-lg-2 logo-wrapper">
+                    <div id="wrapper">
+                        <div id="iconId" class="circle icon">
+                            <span class="line top"></span>
+                            <span class="line middle"></span>
+                            <span class="line bottom"></span>
+                        </div>
+                    </div>
+                    <div class="logo">
+
+                        <a href="/Course/MyCourses">
+                            <img class="uu-header-logo" src="/Content/UmsTheme/assets/images/logo_new.png">
+                        </a>
+                    </div>
+                </div><!-- end col -->
+
+                <div class="col-md-8 col-6 text-right uu-mobile-menu">
+                    <ul class="uu-main-menu">
+                            <li>
+                                <a href="/Routine/Index">My Routine</a>
+                            </li>
+                            <li class="uu-has-sub-menu">
+                                <a href="#">Courses <span><i class="fas fa-chevron-down"></i></span></a>
+                                <ul class="uu-dropdown-menu">
+                                    <li>
+                                        <a href="/Course/MyCourses">My Courses</a>
+                                    </li>
+                                    <li>
+                                        <a href="/Course/Programs">Add New Course</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/Enrolment/MyDue">My Dues</a>
+                            </li>
+                    </ul>
+                </div><!-- end col -->
+
+                <div class="col-md-2 col-6 col-lg-2 text-right uu-mobile-right-menu">
+                    <ul class="uu-main-menu">
+                        <div class="uu-last-element">
+                                <li class="uu-profile">
+                                    <a href="javascript:void(0)">
+                                        <img class="uu-profile-pic" src="/Content/UmsTheme/assets/images/profile-pic.png">
+                                    </a>
+                                    <ul class="uu-dropdown">
+                                        <div class="uu-profile-box">
+                                            <div class="uu-profile-box-header">
+                                                <img src="/Content/UmsTheme/assets/images/profile-pic.png">
+                                            </div>
+                                            <div class="uu-profile-box-body">
+                                                        <h3 class="uu-profile-name">Sajid Hasan Naeem </h3>
+
+                                                <h4 class="uu-profile-email">1069943</h4>
+                                                <ul class="uu-profile-action">
+                                                    <li>
+                                                        <a class="uu-profile-edit" href="/Profile/ChangePassword" data-title="Change Password">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -1 28 28">
+                                                                <defs>
+                                                                    <style>
+                                                                        .cls-1 {
+                                                                            fill: #8f8f8f;
+                                                                        }
+                                                                    </style>
+                                                                </defs>
+                                                                <g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M7.39,18.9,18.72,7.61,15.13,4,3.76,15.35ZM2.62,16.52C1.75,18.59.89,20.64,0,22.74l6.28-2.65Z" /><path class="cls-1" d="M22.74,2.87a3.35,3.35,0,0,1-1.21,2c-.48.46-.93.94-1.37,1.37L16.47,2.58l.83-.82c.38-.38.75-.78,1.16-1.12A2.58,2.58,0,0,1,22.7,2.13c0,.06,0,.11,0,.17Z" /><path class="cls-1" d="M7.39,18.9,3.76,15.35,15.13,4l3.59,3.58Z" /><path class="cls-1" d="M2.62,16.52l3.66,3.57L0,22.74C.89,20.64,1.75,18.59,2.62,16.52Z" /></g></g>
+                                                            </svg>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="uu-profile-view" href="/Profile" data-title="View Profile">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.52 19">
+                                                                <defs>
+                                                                    <style>
+                                                                        .cls-1 {
+                                                                            fill: #8f8f8f;
+                                                                        }
+                                                                    </style>
+                                                                </defs>
+                                                                <g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M24.26,7.21a13.59,13.59,0,0,0-24,0L0,7.69l.26.49a13.63,13.63,0,0,0,4.9,5.21,13.55,13.55,0,0,0,7.1,2,13.52,13.52,0,0,0,7.09-2,13.65,13.65,0,0,0,4.91-5.21l.26-.49Zm-12,7a6.52,6.52,0,1,1,6.51-6.52A6.51,6.51,0,0,1,12.26,14.21Z" /><path class="cls-1" d="M16.44,7.69a4.18,4.18,0,1,1-4.18-4.18A4.19,4.19,0,0,1,16.44,7.69Z" /></g></g>
+                                                            </svg>
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="uu-logout" href="/Account/LogOut" data-title="Log Out">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18.98 24.5">
+                                                                <defs>
+                                                                    <style>
+                                                                        .cls-1 {
+                                                                            fill: #8f8f8f;
+                                                                        }
+                                                                    </style>
+                                                                </defs>
+                                                                <g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M9.49,20.86a9.5,9.5,0,0,1-5-17.57L5.82,5.41a7,7,0,1,0,7.34,0l1.32-2.12a9.5,9.5,0,0,1-5,17.57Z" /><rect class="cls-1" x="8.24" width="2.5" height="11.37" /></g></g>
+                                                            </svg>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </li>
+                        </div>
+                    </ul>
+                </div>
+
+            </div><!-- end row -->
+        </div><!-- end container -->
+
+    </div><!-- End Header Wrapper -->
+
+
+        </header>
+
+
+
+    <!-- Start Mian Section -->
+    <div class="uu-main">
+        <div class="container" style="min-height:40vh;">
+<div class="customMessage text-center">
+    
+
+
+
+    
+
+
+</div>
+
+            
+
+        <style>
+            div > h1, h2, h3, h4, h5, h6, p, form, ul, li, a {
+                font-family: SiyamRupali !important;
+            }
+        </style>
+
+
+<link href="/Content/result.css" rel="stylesheet">
+<style>
+    .reviewRequest {
+        color: #4881d0;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    .reviewRequest:hover {
+        color: #5d6b99;
+    }
+</style>
+<br />
+<div class="TakeExamWrapper">
+    <div class="TakeExamHeader">
+        <h2 style="font-size: 30px;font-weight: bolder;color: #008000;">Analysis Report</h2>
+        <hr style="margin:0px;" />
+        <h2 style="font-size: 25px;">DU_KA Crash Program 2020</h2>
+        <h3>Varsity Standard Daily MCQ and Written Live Exam C-02</h3>
+                        <h5 class="TakeExamHeaderExtra">
+                            <span>MCQ Obtained: <strong>15.25/20</strong> (Correct: 16, Incorrect: 3, Skip: 1) </span>
+
+                        </h5>
+                        <h5 class="TakeExamHeaderExtra">
+                            <span>Written Obtained: <strong>10/10</strong>  | Total Obtained: 25.25/30</span>
+                        </h5>
+                    <h5> <span>Highest Marks: 30</span></h5>
+                    <h5><span>Merit Position: 65</span> </h5>
+
+    </div>
+                <div class="TakeExamHeader">
+                    <h2 style="font-size: 25px;font-weight: bolder;color: #000000;">MCQ</h2>
+                </div>
+            <div class="TakeExamBody">
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 1 </span> <span style="color:red"></span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>মাছ-মাংস সংরক্ষণের জন্য কৌটার ভেতরে কোন যৌগের প্রলেপ দেওয়া হয়?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>AgO</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>ZnS</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>NiO</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>ZnO</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 2 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>একটি বাফার দ্রবণে 0.5 মোল দুর্বল মনোবেসিক এসিড&nbsp;<span class="math-tex">\((pK_a=5.7)\)</span>&nbsp;এবং 0.005 মোল এসিডের পটাসিয়াম লবণ আছে।&nbsp;দ্রবণের pH মান কোনটি?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>6.7</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>2.7</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>5.7</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>3.7</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="row solveText" style="display: block; padding:10px; color:#077307; overflow-x: auto; background-color: #d7f7d4;">
+                                        <span style="color: black !important; font-weight: bold;">Solution:</span>
+                                        <br />
+                                        <span style="color: black !important;"><p><span class="math-tex">\(pH=pK_a+log⁡\frac{n_{salt}}{n_{acid}}=5.7+log⁡\frac{0.005}{0.5}\\=5.7+log⁡0.01=5.7-2=3.7 \)</span></p>
+</span>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 3 </span> <span style="color:red">✘</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>নিচের&nbsp;কোনটি অম্লীয় বাফার দ্রবণ?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsFalse" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(Na_2 CO_3+NaHCO_3\)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(NH_4 OH+NH_4 Cl\)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(CH_3 COOH+CH_3 COONa\)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>None</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 4 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>দুধের প্রধান প্রোটিন কোনটি?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>লিপিড</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>ল্যাকটাবুমিন</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>ক্যারোটিন</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>ক্যাসিন</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 5 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p><span class="math-tex">\(2{\rm KClO}_3\left(s\right) \xrightarrow [∆]{MnO_2} 2KCl\left(s\right)+3O_2(g) ;\)</span>&nbsp;বিক্রিয়াটিতে&nbsp;<span class="math-tex">\(MnO_2\)</span>&nbsp;হলো-</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>আবিষ্ট প্রভাবক</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>ধনাত্মক প্রভাবক</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>অটো প্রভাবক</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>ঋণাত্মক প্রভাবক</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 6 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>নিচের কোন এসিড-ক্ষার যুগলের প্রশমন তাপ সর্বনিন্ম?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(HCl-KOH \)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(HF-NaOH \)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(CH_3 COOH-NaOH \)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(CH_3 COOH-NH_4 OH \)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="row solveText" style="display: block; padding:10px; color:#077307; overflow-x: auto; background-color: #d7f7d4;">
+                                        <span style="color: black !important; font-weight: bold;">Solution:</span>
+                                        <br />
+                                        <span style="color: black !important;"><p>দুর্বল এসিড&nbsp;<span class="math-tex">\((CH_3 COOH) \)</span>&nbsp;ও দুর্বল ক্ষারের&nbsp;<span class="math-tex">\((NH_4 OH) \)</span>&nbsp;প্রশমন তাপ সর্বনিম্ন।</p>
+</span>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 7 </span> <span style="color:red">✘</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>সাসপেনশনের উদাহরণ কোনটি?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>চিনির দ্রবণ</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>রক্ত</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsFalse" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>দুধ</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>জিলেটিন</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 8 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>অক্সোএসিড সমূহের কেন্দ্রীয় পরমাণুর ধনাত্মক জারণ সংখ্যার ভিত্তিতে এসিডের তীব্রতার সঠিক ক্রম কোনটি?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(H_2SO_4&gt;HNO_3&gt;H_2SO_3&gt;HClO_4 \)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(HNO_3&gt;H_2SO_3&gt;HClO_4&gt;H_2SO_4 \)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(H_2SO_3&gt;HNO_3&gt;HClO_4&gt;H_2SO_4 \)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(HClO_4&gt;H_2SO_4&gt;HNO_3&gt;H_2SO_3 \)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 9 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p><span class="math-tex">\({\rm CaCO}_3\)</span>&nbsp;এর বিয়োজনে প্রাপ্ত কাঙ্ক্ষিত উৎপাদ&nbsp;<span class="math-tex">\({\rm CO}_2\)</span> হলে এটম ইকোনোমি কত?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>96%</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>44%</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>80%</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>56%</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="row solveText" style="display: block; padding:10px; color:#077307; overflow-x: auto; background-color: #d7f7d4;">
+                                        <span style="color: black !important; font-weight: bold;">Solution:</span>
+                                        <br />
+                                        <span style="color: black !important;"><p><span class="math-tex">\({\rm CaCO}_3\left(s\right)\rightarrow CaO\left(s\right)+CO_2(g)\)</span></p>
+
+<p><span class="math-tex">\(A.E=\frac{44}{100}\times100\%=44\%\)</span></p>
+</span>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 10 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>কোন দ্রবণের <span class="math-tex">\(pH\)</span>&nbsp;এর মান 7 থেকে 5 এ হ্রাস পেলে&nbsp;<span class="math-tex">\(H^+\)</span> এর ঘনমাত্রা-</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>2&nbsp;গুণ হ্রাস&nbsp;পাবে</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>2&nbsp;গুণ বৃদ্ধি পাবে</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>100&nbsp;গুণ হ্রাস পাবে</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>100&nbsp;গুণ বৃদ্ধি পাবে</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="row solveText" style="display: block; padding:10px; color:#077307; overflow-x: auto; background-color: #d7f7d4;">
+                                        <span style="color: black !important; font-weight: bold;">Solution:</span>
+                                        <br />
+                                        <span style="color: black !important;"><p>ঘনমাত্রার পরিবর্তন&nbsp;<span class="math-tex">\(=\frac{10^{-5}}{10^{-7}} =100 \)</span>&nbsp;গুণ&nbsp;<span class="math-tex">\(\therefore 100\)</span>&nbsp;গুণ বৃদ্ধি পাবে।&nbsp;</p>
+</span>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 11 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>আরহেনিয়াস সমীকরণে&nbsp;<span class="math-tex">\((K=pZe^{-E_a/RT})\, p\)</span>&nbsp;কী নির্দেশ করে?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>সক্রিয়ন শক্তি</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>স্থানিক দিক বিন্যাস</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>হার ধ্রুবক</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>সংঘর্ষ হার</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 12 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p><span class="math-tex">\(5\ mol\ \ PCl_5\)</span>&nbsp;এর বিয়োজন মাত্রা 40% হলে, অবিয়োজিত&nbsp;<span class="math-tex">\(PCl_5\)</span>&nbsp;এর পরিমাণ-</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>2 mol</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>3 mol</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>0.4 mol</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>4.6 mol</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="row solveText" style="display: block; padding:10px; color:#077307; overflow-x: auto; background-color: #d7f7d4;">
+                                        <span style="color: black !important; font-weight: bold;">Solution:</span>
+                                        <br />
+                                        <span style="color: black !important;"><p>বিয়োজিত&nbsp;<span class="math-tex">\(PCl_5=5\times40/100=2\ mol\)</span></p>
+
+<p>&there4; অবিয়োজিত&nbsp;<span class="math-tex">\(PCl_5=\left(5-2\right)=3\ mol\)</span></p>
+</span>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 13 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>নিচের কোনটি সর্বদাই ধনাত্মক?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>গলন তাপ</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>প্রশমন তাপ</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>দ্রবণ তাপ</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>দহন তাপ</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 14 </span> <span style="color:red">✘</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>স্থির আয়তনে কোনো সিস্টেমের এনথালপির হ্রাস-</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsFalse" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>অভ্যন্তরীণ শক্তি বৃদ্ধির সমান</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>অভ্যন্তরীণ শক্তি হ্রাসের সমান</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>অভ্যন্তরীণ শক্তি যতটুকু বৃদ্ধি পায় তার থেকে কিছু কম</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>অভ্যন্তরীণ শক্তি যতটুকু বৃদ্ধি পায় তার থেকে কিছু বেশি</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 15 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p><span class="math-tex">\(H_2 (g)+I_2 (g)⇌2HI(g)\)</span>&nbsp;বিক্রিয়ার ক্ষেত্রে&nbsp;<span class="math-tex">\(K_P\)</span>&nbsp;ও&nbsp;<span class="math-tex">\(K_C\)</span>&nbsp;এর সম্পর্ক কোনটি?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(K_C=K_P (RT)^2\)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(K_P=K_C (RT)^{-2}\)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(K_P=K_C (RT)^2\)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(K_P=K_C\)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="row solveText" style="display: block; padding:10px; color:#077307; overflow-x: auto; background-color: #d7f7d4;">
+                                        <span style="color: black !important; font-weight: bold;">Solution:</span>
+                                        <br />
+                                        <span style="color: black !important;"><p><span class="math-tex">\(\Delta n=0 ∴K_P=K_C\)</span></p>
+</span>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 16 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>বিক্রিয়া হারের একক নিচের কোনটি?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(molL^{-1}s^{-1}\)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(molL^{-1}s\)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(molLs^{-1}\)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p><span class="math-tex">\(mol^{-1}L^{-1}s^{-1}\)</span></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 17 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>খাদ্য সংরক্ষণে ব্যবহৃত অ্যান্টিঅক্সিডেন্ট কোনটি?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>BHT</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>C<sub>6</sub>H<sub>12</sub>O<sub>6</sub></p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>EDTA</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>CH<sub>3</sub>COOH</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 18 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>প্রিজারভেটিভরূপে ব্যবহৃত সাইট্রিক এসিডের pH মান কত থাকে?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>3.14</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>4.74</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>4.2</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>2.8</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 19 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p><span class="math-tex">\(2A+B →3C+D ; \)</span>&nbsp;বিক্রিয়াটির হার A এর ঘনমাত্রার দ্বিতীয় ঘাত ও B এর ঘনমাত্রার তৃতীয় ঘাতের উপর নির্ভরশীল হলে বিক্রিয়াটির ক্রম কত?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>5</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>2</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>3</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>6</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="row solveText" style="display: block; padding:10px; color:#077307; overflow-x: auto; background-color: #d7f7d4;">
+                                        <span style="color: black !important; font-weight: bold;">Solution:</span>
+                                        <br />
+                                        <span style="color: black !important;"><p>n = x + y = 2 + 3 =5</p>
+</span>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+
+
+                            <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 20 </span> <span style="color:green">✔</span>
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <p>লিপস্টিকের মূল উপাদান কোনটি?</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row questionOptions">
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">A</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>ভেসেলিন</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">B</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>খনিজ তৈল</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group AnsTrue" style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">C</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer" checked />
+                                                <label style="margin-left:5px;"><p>মোম</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 row questionOption">
+                                        <div class="input-group " style="align-items: center;">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text" style="font-weight:bold;">D</span>
+                                            </div>
+                                            <div class="input-group-append questionTable">
+                                                <input type="checkbox" class="form-control optionCheckbox" name="StudentAnswer"  />
+                                                <label style="margin-left:5px;"><p>রঞ্জক পদার্থ</p>
+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+            </div>
+                <div class="TakeExamHeader">
+                    <h2 style="font-size: 25px;font-weight: bolder;color: #000000;">Written</h2>
+                </div>
+            <div class="TakeExamBody">
+                        <div class="row questionBlock">
+                                                        <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 1</span>
+                                                        <span style="color:green; font-weight:bold; float:right !important; ">             4/4</span>
+
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <table border="0" cellpadding="1" cellspacing="1" style="width: 100%;">
+	<tbody>
+		<tr>
+			<td><span class="math-tex">\(PCl_5\left(g\right) \rightleftharpoons{\rm PCl}_3\left(g\right)+Cl_2\left(g\right); ∆H=+x\ kJ;\)</span>&nbsp;উক্ত বিক্রিয়ায় সাম্যাবস্থায় তাপমাত্রা ও চাপের প্রভাব লিখ।&nbsp;</td>
+			<td style="vertical-align: bottom; text-align: right;">৪</td>
+		</tr>
+	</tbody>
+</table>
+
+                                        </div>
+                                                    <div class="questionText" style="display: block; border:1px solid solid; padding:0px;">
+                                                        <div style="border: 1px solid solid; padding: 0px;">
+                                                            <img style="width:100%;" src="https://ums-web-public-files.s3-ap-southeast-1.amazonaws.com/StudentWrittenExamImage/26390/1327964_26390_6d0f8426-541e-467e-9cc6-b546bfe90314/anno_1_39b5d75e-78eb-4b55-9570-86ec33776077.jpg" />
+                                                        </div>
+                                                    </div>
+
+                                    </div>
+                                </div>
+                                            <div class="row solveText" style=" display: block; padding:10px; color:#077307; overflow-x: auto; background-color: #d7f7d4; ">
+                                                
+                                                <p><strong>তাপমাত্রার প্রভাব:</strong> তাপমাত্রা বাড়ালে, উৎপাদ বাড়বে ও সাম্যাবস্থা ডানে যাবে এবং তাপমাত্রা কমালে, উৎপাদ কমবে ও সাম্যাবস্থা বামে যাবে।</p>
+
+<p><strong>চাপের প্রভাব: </strong>চাপ বাড়ালে, উৎপাদ কমবে ও সাম্যাবস্থা বামে যাবে এবং চাপ কমালে, উৎপাদ বাড়বে ও সাম্যাবস্থা ডানে যাবে।</p>
+
+<p><strong>নম্বর বণ্টন:</strong></p>
+
+<p>বিক্রিয়াটির সাম্যাবস্থায় তাপমাত্রা ও চাপের প্রভাব যেকোন যুক্তিযুক্ত উপায়ে ব্যাখ্যা করার জন্য (২&times;২) = ০৪ নম্বর।</p>
+
+                                            </div>
+                                            <div class="alert" role="alert" style="width:100% !important; text-align:center; margin-bottom:0px;">
+                                                <span class="reviewRequest" style="margin-bottom:10px;" id="">Request for Review</span>
+
+                                                <div class="text-center formBox" style="display:none;" maxlength="1000">
+                                                    <div class="text-right counterBox" style="font-weight:bold;">
+                                                        <span class="doubtCounter">0</span><span>/1000</span>
+                                                    </div>
+
+                                                    <input type="hidden" class="doubt-form-data" value="aSkXdhE8HGrl3IDrOXkkNZwvS+umwdy/GSjX6HkMx07kliYtFd2eyBPr4adrUZty0YlhKeYCOFbUbeOiFbGCFsUOZqxZ8vgdm2+cxzLU9dD/EKwtWCqz7EyyPNdh4tjyYl91m8opTQtF0roVmge9tw==" />
+                                                    <textarea class="doubtField form-control" maxlength="1000" rows="3" placeholder="Enter your doubt here..."></textarea>
+                                                    <br />
+                                                    <button class="uu-button-style-2 reviewCancel">Cancel</button>
+                                                    <button class="uu-button-style-4 reviewSubmit">Submit Request</button>
+                                                </div>
+                                            </div>
+
+
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+                                                        <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 2</span>
+                                                        <span style="color:green; font-weight:bold; float:right !important; ">             3/3</span>
+
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <table border="0" cellpadding="1" cellspacing="1" style="width: 100%;">
+	<tbody>
+		<tr>
+			<td><span class="math-tex">\(CH_4\left(g\right)+3Cl_2\left(g\right)\rightarrow CHCl_3\left(l\right)+3HCl\left(g\right);\)</span>&nbsp;এ বিক্রিয়াটির বিক্রিয়া তাপ গণনা কর।&nbsp; <span class="math-tex">\((C-H,\ Cl-Cl,\ C-Cl\)</span>&nbsp; ও&nbsp;<span class="math-tex">\(H-Cl\)</span>&nbsp;এর বন্ধনশক্তি যথাক্রমে 413, 243, 339, 427&nbsp;<span class="math-tex">\(kJmol^{-1}\)</span>)</td>
+			<td style="vertical-align: bottom; text-align: right;">৩</td>
+		</tr>
+	</tbody>
+</table>
+
+                                        </div>
+                                                    <div class="questionText" style="display: block; border:1px solid solid; padding:0px;">
+                                                        <div style="border: 1px solid solid; padding: 0px;">
+                                                            <img style="width:100%;" src="https://ums-web-public-files.s3-ap-southeast-1.amazonaws.com/StudentWrittenExamImage/26390/1327964_26390_6d0f8426-541e-467e-9cc6-b546bfe90314/anno_2_debbffdc-9a07-49de-b520-5d2e897a41da.jpg" />
+                                                        </div>
+                                                    </div>
+
+                                    </div>
+                                </div>
+                                            <div class="row solveText" style=" display: block; padding:10px; color:#077307; overflow-x: auto; background-color: #d7f7d4; ">
+                                                
+                                                <p>বন্ধন ভাঙনে প্রয়োজনীয় শক্তি,&nbsp;<span class="math-tex">\(E_1=3\times C-H+3\times Cl-Cl\)</span></p>
+
+<p><span class="math-tex">\(=3\times413+3\times243=1968\ kJ/mol\)</span></p>
+
+<p>বন্ধন গড়তে নির্গত শক্তি,&nbsp;<span class="math-tex">\(E_2=3\times C-Cl+3\times H-Cl\)</span></p>
+
+<p><span class="math-tex">\(=3\times339+3\times427=2298\ kJ/mol \)</span></p>
+
+<p><span class="math-tex">\(\therefore\ ∆H=E_1-E_2=1968-2298=-330 kJ/mol\ (Ans.)\)</span></p>
+
+<p><strong>নম্বর বণ্টন:</strong></p>
+
+<p>E<sub>1&nbsp;</sub>= 1968 kJ/mol, নির্ণয়ের জন্য ০১ নম্বর।</p>
+
+<p>E<sub>2&nbsp;</sub>= 2298 kJ/mol&nbsp;, নির্ণয়ের জন্য ০১ নম্বর।</p>
+
+<p>∆H = -330 kJ/mol, নির্ণয়ের জন্য ০১ নম্বর।</p>
+
+<p>বি.দ্র.:</p>
+
+<p>একক না লিখলে অথবা ভুল একক লিখলে ০.৫ নম্বর কর্তন করতে হবে।</p>
+
+<p>সূত্র না লিখে সরাসরি সূত্রে মান বসালেও গ্রহণযোগ্য হবে ।</p>
+
+<p>অন্য যে কোন যুক্তিযুক্ত উপায়ে সমাধান করলেও গ্রহণযোগ্য হবে।</p>
+
+                                            </div>
+                                            <div class="alert" role="alert" style="width:100% !important; text-align:center; margin-bottom:0px;">
+                                                <span class="reviewRequest" style="margin-bottom:10px;" id="">Request for Review</span>
+
+                                                <div class="text-center formBox" style="display:none;" maxlength="1000">
+                                                    <div class="text-right counterBox" style="font-weight:bold;">
+                                                        <span class="doubtCounter">0</span><span>/1000</span>
+                                                    </div>
+
+                                                    <input type="hidden" class="doubt-form-data" value="aSkXdhE8HGrl3IDrOXkkNZNdHtLWFWRO9YEqPVpHMqxfkPKDrc4uRTfEh6I3Ua8IHMhd99pONo+/hsE9oXMxHG18LRK/ki7G05cl3xInItx84eilDPpistZsC4K85qGE8oHLX/lhh38e1sizEayZ3w==" />
+                                                    <textarea class="doubtField form-control" maxlength="1000" rows="3" placeholder="Enter your doubt here..."></textarea>
+                                                    <br />
+                                                    <button class="uu-button-style-2 reviewCancel">Cancel</button>
+                                                    <button class="uu-button-style-4 reviewSubmit">Submit Request</button>
+                                                </div>
+                                            </div>
+
+
+                            </div>
+                        </div>
+                        <div class="row questionBlock">
+                                                        <div class="row question">
+                                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
+                                    <div class="row">
+                                        <div class="serial">
+                                            <span>Question 3</span>
+                                                        <span style="color:green; font-weight:bold; float:right !important; ">             3/3</span>
+
+                                        </div>
+                                        <div class="questionText" style="display: block;">
+                                            <table border="0" cellpadding="1" cellspacing="1" style="width: 100%;">
+	<tbody>
+		<tr>
+			<td>
+			<p>গ্লাস ক্লিনারে কস্টিক সোডা ব্যবহার না করে অ্যামোনিয়া ব্যবহার করা হয়। বিক্রিয়াসহ ব্যাখ্যা কর।&nbsp;</p>
+			</td>
+			<td style="vertical-align: bottom; text-align: right;">৩</td>
+		</tr>
+	</tbody>
+</table>
+
+                                        </div>
+                                                    <div class="questionText" style="display: block; border:1px solid solid; padding:0px;">
+                                                        <div style="border: 1px solid solid; padding: 0px;">
+                                                            <img style="width:100%;" src="https://ums-web-public-files.s3-ap-southeast-1.amazonaws.com/StudentWrittenExamImage/26390/1327964_26390_6d0f8426-541e-467e-9cc6-b546bfe90314/anno_3_5e67699b-9d91-4d24-8d20-3b86f3979346.jpg" />
+                                                        </div>
+                                                    </div>
+
+                                    </div>
+                                </div>
+                                            <div class="row solveText" style=" display: block; padding:10px; color:#077307; overflow-x: auto; background-color: #d7f7d4; ">
+                                                
+                                                <p>গ্লাসে অম্লধর্মী <span class="math-tex">\(SiO_2\)</span>&nbsp; থাকার কারণে কস্টিক সোডা (NaOH) বিক্রিয়া করে দ্রবণীয় সোডিয়াম সিলিকেট তৈরি করে ও কাচের মসৃণতা নষ্ট হয়।&nbsp;<span class="math-tex">\(2NaOH_{(aq)}+SiO_{2\ \ (s)}\rightarrow Na_2SiO_{3\ \ \left(aq\right)}+H_2O(l)\ \ \)</span></p>
+
+<p>কিন্তু অ্যামোনিয়া কাচের সিলিকার সাথে বিক্রিয়া করে না তাই গ্লাস ক্লিনারে ব্যবহার করা হয়।</p>
+
+<p><strong>নম্বর বণ্টন:</strong></p>
+
+<p><strong><span class="math-tex">\(2NaOH_{(aq)}+SiO_{2\ \ (s)}\rightarrow Na_2SiO_{3\ \ \left(aq\right)}+H_2O\left(l\right),\ \)</span></strong></p>
+
+<p>এই বিক্রিয়াটি লিখার জন্য ০২ নম্বর।</p>
+
+<p>কিন্তু অ্যামোনিয়া কাচের সিলিকার সাথে বিক্রিয়া করে না তাই গ্লাস ক্লিনারে ব্যবহার করা হয়, এটি যেকোনো ভাবে ব্যাখ্যা করার জন্য ০১ নম্বর।</p>
+
+<p><strong>[বি.দ্র:</strong></p>
+
+<p>বিক্রিয়ার সমতাকরণ করার প্রয়োজন নেই।</p>
+
+<p>বিক্রিয়ার মূল উৎপাদ/উৎপাদসমূহ লিখাই যথেষ্ট।]</p>
+
+                                            </div>
+                                            <div class="alert" role="alert" style="width:100% !important; text-align:center; margin-bottom:0px;">
+                                                <span class="reviewRequest" style="margin-bottom:10px;" id="">Request for Review</span>
+
+                                                <div class="text-center formBox" style="display:none;" maxlength="1000">
+                                                    <div class="text-right counterBox" style="font-weight:bold;">
+                                                        <span class="doubtCounter">0</span><span>/1000</span>
+                                                    </div>
+
+                                                    <input type="hidden" class="doubt-form-data" value="aSkXdhE8HGrl3IDrOXkkNXJnuYVT1z4G9gnrwfojYlK7hmdFJ1g7UJFmtkY0Xdfo/Sam5eRLaB2JVcQ7KLVdWjzBN757Br0jhlTBf1u1IdwNUcIncGauT/Vmo2+LH9Njs4q0TNAGOXMW/kILzWYDrw==" />
+                                                    <textarea class="doubtField form-control" maxlength="1000" rows="3" placeholder="Enter your doubt here..."></textarea>
+                                                    <br />
+                                                    <button class="uu-button-style-2 reviewCancel">Cancel</button>
+                                                    <button class="uu-button-style-4 reviewSubmit">Submit Request</button>
+                                                </div>
+                                            </div>
+
+
+                            </div>
+                        </div>
+
+            </div>
+
+    <div class="col-md-12">
+        <div class="text-center">
+            <a class="uu-button-style-4" href="/Routine?type=exam">My Routine</a>
+        </div>
+    </div>
+</div>
+
+        </div><!-- end container -->
+    </div><!-- End Mian Section -->
+
+
+
+
+<!-- Start Footer Section -->
+<footer>
+    <div class="container">
+        <div class="row uu-footer-top" style="text-align: center;">
+            <div class="col-md-4 col-sm-6">
+                <img class="uu-footer-logo" src="/Content/UmsTheme/assets/images/footer_logo_new.png">
+            </div><!-- end col -->
+
+            <div class="col-md-2 col-sm-6">
+                <h2 class="uu-footer-title">
+                    Help
+                </h2>
+                <ul class="uu-footer-menu">
+                    <li>
+                        <a href="https://new.udvash.com/about-us/" target="_blank">About Us</a>
+                    </li>
+                    <li>
+                        <a href="https://new.udvash.com/faqs/" target="_blank">FAQs</a>
+                    </li>
+                    
+                    <li>
+                        <a href="/Home/PrivacyPolicy/">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="/Home/TermsAndConditions/">Terms & Conditions</a>
+                    </li>
+                </ul>
+
+            </div><!-- end col -->
+
+            <div class="col-md-2 col-sm-6">
+
+                <h2 class="uu-footer-title">
+                    Explore
+                </h2>
+                <ul class="uu-footer-menu">
+                    
+                    <li>
+                        <a href="https://new.udvash.com" target="_blank">Udvash</a>
+                    </li>
+                    <li>
+                        <a href="https://new.unmeshbd.com" target="_blank">Unmesh</a>
+                    </li>
+                    <li>
+                        <a href="https://bcsuttoron.com" target="_blank">Uttoron</a>
+                    </li>
+                    <li>
+                        <a href="https://udvash-unmesh.com" target="_blank">Udvash-Unmesh</a>
+                    </li>
+                    <li>
+                        <a href="/Home/ContactUs/">Contact Us</a>
+                    </li>
+                </ul>
+
+            </div><!-- end col -->
+
+            <div class="col-md-4 col-sm-6">
+
+
+                <h2 class="uu-footer-title">
+                    Get in Touch
+                </h2>
+                <ul class="uu-footer-menu">
+                    <li>
+                        <a href="https://goo.gl/maps/Avb2D9UhcXwxr1oq8" target="_blank">
+                            Address: Malek Tower (6th Floor), Opposite Farmgate <br>
+                            Police Box, Farmgate Dhaka 1215.
+                        </a>
+                    </li>
+                    <li>
+                        Phone : <a href="tel:09666775566">09666775566</a>
+                    </li>
+                    <li>
+                        Email: <a href="/cdn-cgi/l/email-protection#fa93949c95ba8f9e8c9b8992d4999597"><span class="__cf_email__" data-cfemail="422b2c242d0237263423312a6c212d2f">[email&#160;protected]</span></a>
+                    </li>
+                    <li class="social-icons">
+                        <a href="https://www.facebook.com/udvash/" target="_blank" title="Udvash">
+                            <img src="/Content/UmsTheme/assets/img/facebook.svg">
+                        </a>
+                        <a href="https://www.youtube.com/c/UdvashUnmesh" target="_blank" title="Udvash-Unmesh">
+                            <img src="/Content/UmsTheme/assets/img/youtube.svg">
+                        </a>
+                        <a href="https://www.facebook.com/UnmeshPage/" target="_blank" title="Unmesh">
+                            <img src="/Content/UmsTheme/assets/img/facebook.svg">
+                        </a>
+                    </li>
+                </ul>
+
+            </div><!-- end col -->
+
+        </div><!-- end row -->
+        <!-- end footer top section -->
+
+        <div class="row uu-footer-bottom">
+            <div class="col-12">
+                <p class="text-center">
+                    <span>Copyright &copy; 2000-2021 Udvash-Unmesh.</span>
+                    | <span>P-10784 v_16.116.16911</span>
+                    | <a href="/Home/PrivacyPolicy/">Privacy Policy</a>
+                    | <a href="/Home/TermsAndConditions/">Terms & Conditions</a>
+                </p>
+            </div>
+        </div><!-- end row -->
+        <!-- end footer bottom section -->
+
+    </div><!-- end container -->
+</footer><!-- End Footer Section -->
+
+
+
+
+<!-- ----------------------------------------------------------------
+        Page Scripts
+----------------------------------------------------------------- -->
+<!-- Bootstrap -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript" src="/Content/UmsTheme/assets/lib/bootstrap/bootstrap.bundle.min.js"></script>
+
+<script type="text/javascript" src="/Content/UmsTheme/assets/lib/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+
+<!-- Fontawesome -->
+
+<script src="/Scripts/bootstrap-datetimepicker.min.js"></script>
+<!-- Common -->
+<script type="text/javascript" src="/Scripts/Common-2.0.js?v=16.116.16911"></script>
+<!-- Main -->
+<script type="text/javascript" src="/Content/UmsTheme/assets/js/main.js?v=16.116.16911"></script>
+<script type="text/javascript" src="/Scripts/footer.js?v=16.116.16911"></script>
+
+
+        <!--Online.Udvash-unmesh.com-->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165826877-3"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-165826877-3');
+        </script>
+    <!-- ORGbd-UMSbd -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-42339180-6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-42339180-6');
+    </script>
+    <!-- Hotjar Tracking Code for online.udvash-unmesh.com -->
+    <script>
+        (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+            h._hjSettings = { hjid: 1908076, hjsv: 6 };
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script'); r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML" id=""></script>
+    <script type="text/javascript" src="/Scripts/jquery.blockUI.js"></script>
+    <script type="text/javascript">
+        function gettoken() {
+                var token = '<input name="__RequestVerificationToken" type="hidden" value="2_1trZLI1N7AznsPsPdj-EA8b4JI33YXTd_-XG0IFuL35rvobo5ZiOZl2rXTg_ur1XjKlqiIiEjjsZM8u-9fSyGofICEuN3v4STpNUjwgpU1" />';
+                token = $(token).val();
+                return token;
+        }
+        function isHTML(str) {
+            var doc = new DOMParser().parseFromString(str, "text/html");
+            return Array.from(doc.body.childNodes).some(node => node.nodeType === 1);
+        }
+        function isEmoji(str) {
+            var emojiPattern = '(?:\uD83D(?:\uDD73\uFE0F?|\uDC41(?:(?:\uFE0F(?:\u200D\uD83D\uDDE8\uFE0F?)?|\u200D\uD83D\uDDE8\uFE0F?))?|[\uDDE8\uDDEF]\uFE0F?|\uDC4B(?:\uD83C[\uDFFB-\uDFFF])?|\uDD90(?:(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F))?|[\uDD96\uDC4C\uDC48\uDC49\uDC46\uDD95\uDC47\uDC4D\uDC4E\uDC4A\uDC4F\uDE4C\uDC50\uDE4F\uDC85\uDCAA\uDC42\uDC43\uDC76\uDC66\uDC67](?:\uD83C[\uDFFB-\uDFFF])?|\uDC71(?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2640\u2642]\uFE0F?))?)|\u200D(?:[\u2640\u2642]\uFE0F?)))?|\uDC68(?:(?:\uD83C(?:\uDFFB(?:\u200D(?:\uD83E(?:\uDD1D\u200D\uD83D\uDC68\uD83C[\uDFFC-\uDFFF]|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?))?|\uDFFC(?:\u200D(?:\uD83E(?:\uDD1D\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF]|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?))?|\uDFFD(?:\u200D(?:\uD83E(?:\uDD1D\u200D\uD83D\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?))?|\uDFFE(?:\u200D(?:\uD83E(?:\uDD1D\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF]|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?))?|\uDFFF(?:\u200D(?:\uD83E(?:\uDD1D\u200D\uD83D\uDC68\uD83C[\uDFFB-\uDFFE]|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?))?)|\u200D(?:\uD83E[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD]|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D(?:\uDC69\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|\uDC68\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?|[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92])|\u2708\uFE0F?|\u2764(?:\uFE0F\u200D\uD83D(?:\uDC8B\u200D\uD83D\uDC68|\uDC68)|\u200D\uD83D(?:\uDC8B\u200D\uD83D\uDC68|\uDC68)))))?|\uDC69(?:(?:\uD83C(?:\uDFFB(?:\u200D(?:\uD83E(?:\uDD1D\u200D\uD83D(?:\uDC69\uD83C[\uDFFC-\uDFFF]|\uDC68\uD83C[\uDFFC-\uDFFF])|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?))?|\uDFFC(?:\u200D(?:\uD83E(?:\uDD1D\u200D\uD83D(?:\uDC69\uD83C[\uDFFB\uDFFD-\uDFFF]|\uDC68\uD83C[\uDFFB\uDFFD-\uDFFF])|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?))?|\uDFFD(?:\u200D(?:\uD83E(?:\uDD1D\u200D\uD83D(?:\uDC69\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF]|\uDC68\uD83C[\uDFFB\uDFFC\uDFFE\uDFFF])|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?))?|\uDFFE(?:\u200D(?:\uD83E(?:\uDD1D\u200D\uD83D(?:\uDC69\uD83C[\uDFFB-\uDFFD\uDFFF]|\uDC68\uD83C[\uDFFB-\uDFFD\uDFFF])|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?))?|\uDFFF(?:\u200D(?:\uD83E(?:\uDD1D\u200D\uD83D(?:\uDC69\uD83C[\uDFFB-\uDFFE]|\uDC68\uD83C[\uDFFB-\uDFFE])|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?))?)|\u200D(?:\uD83E[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD]|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D(?:\uDC69\u200D\uD83D(?:\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?)|\uDC66(?:\u200D\uD83D\uDC66)?|\uDC67(?:\u200D\uD83D[\uDC66\uDC67])?|[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92])|\u2708\uFE0F?|\u2764(?:\uFE0F\u200D\uD83D(?:\uDC8B\u200D\uD83D[\uDC68\uDC69]|[\uDC68\uDC69])|\u200D\uD83D(?:\uDC8B\u200D\uD83D[\uDC68\uDC69]|[\uDC68\uDC69])))))?|[\uDC74\uDC75](?:\uD83C[\uDFFB-\uDFFF])?|[\uDE4D\uDE4E\uDE45\uDE46\uDC81\uDE4B\uDE47\uDC6E](?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|\uDD75(?:(?:\uFE0F(?:\u200D(?:[\u2642\u2640]\uFE0F?))?|\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|[\uDC82\uDC77](?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|\uDC78(?:\uD83C[\uDFFB-\uDFFF])?|\uDC73(?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|[\uDC72\uDC70\uDC7C](?:\uD83C[\uDFFB-\uDFFF])?|[\uDC86\uDC87\uDEB6](?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|[\uDC83\uDD7A](?:\uD83C[\uDFFB-\uDFFF])?|\uDD74(?:(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F))?|\uDC6F(?:\u200D(?:[\u2642\u2640]\uFE0F?))?|[\uDEA3\uDEB4\uDEB5](?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|[\uDEC0\uDECC\uDC6D\uDC6B\uDC6C](?:\uD83C[\uDFFB-\uDFFF])?|\uDDE3\uFE0F?|\uDC15(?:\u200D\uD83E\uDDBA)?|[\uDC3F\uDD4A\uDD77\uDD78\uDDFA\uDEE3\uDEE4\uDEE2\uDEF3\uDEE5\uDEE9\uDEF0\uDECE\uDD70\uDD79\uDDBC\uDD76\uDECD\uDDA5\uDDA8\uDDB1\uDDB2\uDCFD\uDD6F\uDDDE\uDDF3\uDD8B\uDD8A\uDD8C\uDD8D\uDDC2\uDDD2\uDDD3\uDD87\uDDC3\uDDC4\uDDD1\uDDDD\uDEE0\uDDE1\uDEE1\uDDDC\uDECF\uDECB\uDD49]\uFE0F?|[\uDE00\uDE03\uDE04\uDE01\uDE06\uDE05\uDE02\uDE42\uDE43\uDE09\uDE0A\uDE07\uDE0D\uDE18\uDE17\uDE1A\uDE19\uDE0B\uDE1B-\uDE1D\uDE10\uDE11\uDE36\uDE0F\uDE12\uDE44\uDE2C\uDE0C\uDE14\uDE2A\uDE34\uDE37\uDE35\uDE0E\uDE15\uDE1F\uDE41\uDE2E\uDE2F\uDE32\uDE33\uDE26-\uDE28\uDE30\uDE25\uDE22\uDE2D\uDE31\uDE16\uDE23\uDE1E\uDE13\uDE29\uDE2B\uDE24\uDE21\uDE20\uDE08\uDC7F\uDC80\uDCA9\uDC79-\uDC7B\uDC7D\uDC7E\uDE3A\uDE38\uDE39\uDE3B-\uDE3D\uDE40\uDE3F\uDE3E\uDE48-\uDE4A\uDC8B\uDC8C\uDC98\uDC9D\uDC96\uDC97\uDC93\uDC9E\uDC95\uDC9F\uDC94\uDC9B\uDC9A\uDC99\uDC9C\uDDA4\uDCAF\uDCA2\uDCA5\uDCAB\uDCA6\uDCA8\uDCA3\uDCAC\uDCAD\uDCA4\uDC40\uDC45\uDC44\uDC8F\uDC91\uDC6A\uDC64\uDC65\uDC63\uDC35\uDC12\uDC36\uDC29\uDC3A\uDC31\uDC08\uDC2F\uDC05\uDC06\uDC34\uDC0E\uDC2E\uDC02-\uDC04\uDC37\uDC16\uDC17\uDC3D\uDC0F\uDC11\uDC10\uDC2A\uDC2B\uDC18\uDC2D\uDC01\uDC00\uDC39\uDC30\uDC07\uDC3B\uDC28\uDC3C\uDC3E\uDC14\uDC13\uDC23-\uDC27\uDC38\uDC0A\uDC22\uDC0D\uDC32\uDC09\uDC33\uDC0B\uDC2C\uDC1F-\uDC21\uDC19\uDC1A\uDC0C\uDC1B-\uDC1E\uDC90\uDCAE\uDD2A\uDDFE\uDDFB\uDC92\uDDFC\uDDFD\uDD4C\uDED5\uDD4D\uDD4B\uDC88\uDE82-\uDE8A\uDE9D\uDE9E\uDE8B-\uDE8E\uDE90-\uDE9C\uDEF5\uDEFA\uDEB2\uDEF4\uDEF9\uDE8F\uDEA8\uDEA5\uDEA6\uDED1\uDEA7\uDEF6\uDEA4\uDEA2\uDEEB\uDEEC\uDCBA\uDE81\uDE9F-\uDEA1\uDE80\uDEF8\uDD5B\uDD67\uDD50\uDD5C\uDD51\uDD5D\uDD52\uDD5E\uDD53\uDD5F\uDD54\uDD60\uDD55\uDD61\uDD56\uDD62\uDD57\uDD63\uDD58\uDD64\uDD59\uDD65\uDD5A\uDD66\uDD25\uDCA7\uDEF7\uDD2E\uDC53-\uDC62\uDC51\uDC52\uDCFF\uDC84\uDC8D\uDC8E\uDD07-\uDD0A\uDCE2\uDCE3\uDCEF\uDD14\uDD15\uDCFB\uDCF1\uDCF2\uDCDE-\uDCE0\uDD0B\uDD0C\uDCBB\uDCBD-\uDCC0\uDCFA\uDCF7-\uDCF9\uDCFC\uDD0D\uDD0E\uDCA1\uDD26\uDCD4-\uDCDA\uDCD3\uDCD2\uDCC3\uDCDC\uDCC4\uDCF0\uDCD1\uDD16\uDCB0\uDCB4-\uDCB8\uDCB3\uDCB9\uDCB1\uDCB2\uDCE7-\uDCE9\uDCE4-\uDCE6\uDCEB\uDCEA\uDCEC-\uDCEE\uDCDD\uDCBC\uDCC1\uDCC2\uDCC5-\uDCD0\uDD12\uDD13\uDD0F-\uDD11\uDD28\uDD2B\uDD27\uDD29\uDD17\uDD2C\uDD2D\uDCE1\uDC89\uDC8A\uDEAA\uDEBD\uDEBF\uDEC1\uDED2\uDEAC\uDDFF\uDEAE\uDEB0\uDEB9-\uDEBC\uDEBE\uDEC2-\uDEC5\uDEB8\uDEAB\uDEB3\uDEAD\uDEAF\uDEB1\uDEB7\uDCF5\uDD1E\uDD03\uDD04\uDD19-\uDD1D\uDED0\uDD4E\uDD2F\uDD00-\uDD02\uDD3C\uDD3D\uDD05\uDD06\uDCF6\uDCF3\uDCF4\uDD31\uDCDB\uDD30\uDD1F-\uDD24\uDD34\uDFE0-\uDFE2\uDD35\uDFE3-\uDFE5\uDFE7-\uDFE9\uDFE6\uDFEA\uDFEB\uDD36-\uDD3B\uDCA0\uDD18\uDD33\uDD32\uDEA9])|\uD83E(?:[\uDD1A\uDD0F\uDD1E\uDD1F\uDD18\uDD19\uDD1B\uDD1C\uDD32\uDD33\uDDB5\uDDB6\uDDBB\uDDD2](?:\uD83C[\uDFFB-\uDFFF])?|\uDDD1(?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:\uD83E(?:\uDD1D\u200D\uD83E\uDDD1\uD83C[\uDFFB-\uDFFF]|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?))?)|\u200D(?:\uD83E(?:\uDD1D\u200D\uD83E\uDDD1|[\uDDB0\uDDB1\uDDB3\uDDB2\uDDAF\uDDBC\uDDBD])|\u2695\uFE0F?|\uD83C[\uDF93\uDFEB\uDF3E\uDF73\uDFED\uDFA4\uDFA8]|\u2696\uFE0F?|\uD83D[\uDD27\uDCBC\uDD2C\uDCBB\uDE80\uDE92]|\u2708\uFE0F?)))?|[\uDDD4\uDDD3](?:\uD83C[\uDFFB-\uDFFF])?|[\uDDCF\uDD26\uDD37](?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|[\uDD34\uDDD5\uDD35\uDD30\uDD31\uDD36](?:\uD83C[\uDFFB-\uDFFF])?|[\uDDB8\uDDB9\uDDD9-\uDDDD](?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|[\uDDDE\uDDDF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?|[\uDDCD\uDDCE\uDDD6\uDDD7\uDD38](?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|\uDD3C(?:\u200D(?:[\u2642\u2640]\uFE0F?))?|[\uDD3D\uDD3E\uDD39\uDDD8](?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|[\uDD23\uDD70\uDD29\uDD2A\uDD11\uDD17\uDD2D\uDD2B\uDD14\uDD10\uDD28\uDD25\uDD24\uDD12\uDD15\uDD22\uDD2E\uDD27\uDD75\uDD76\uDD74\uDD2F\uDD20\uDD73\uDD13\uDDD0\uDD7A\uDD71\uDD2C\uDD21\uDD16\uDDE1\uDD0E\uDD0D\uDD1D\uDDBE\uDDBF\uDDE0\uDDB7\uDDB4\uDD3A\uDDB0\uDDB1\uDDB3\uDDB2\uDD8D\uDDA7\uDDAE\uDD8A\uDD9D\uDD81\uDD84\uDD93\uDD8C\uDD99\uDD92\uDD8F\uDD9B\uDD94\uDD87\uDDA5\uDDA6\uDDA8\uDD98\uDDA1\uDD83\uDD85\uDD86\uDDA2\uDD89\uDDA9\uDD9A\uDD9C\uDD8E\uDD95\uDD96\uDD88\uDD8B\uDD97\uDD82\uDD9F\uDDA0\uDD40\uDD6D\uDD5D\uDD65\uDD51\uDD54\uDD55\uDD52\uDD6C\uDD66\uDDC4\uDDC5\uDD5C\uDD50\uDD56\uDD68\uDD6F\uDD5E\uDDC7\uDDC0\uDD69\uDD53\uDD6A\uDD59\uDDC6\uDD5A\uDD58\uDD63\uDD57\uDDC8\uDDC2\uDD6B\uDD6E\uDD5F-\uDD61\uDD80\uDD9E\uDD90\uDD91\uDDAA\uDDC1\uDD67\uDD5B\uDD42\uDD43\uDD64\uDDC3\uDDC9\uDDCA\uDD62\uDD44\uDDED\uDDF1\uDDBD\uDDBC\uDE82\uDDF3\uDE90\uDDE8\uDDE7\uDD47-\uDD49\uDD4E\uDD4F\uDD4D\uDD4A\uDD4B\uDD45\uDD3F\uDD4C\uDE80\uDE81\uDDFF\uDDE9\uDDF8\uDDF5\uDDF6\uDD7D\uDD7C\uDDBA\uDDE3-\uDDE6\uDD7B\uDE71-\uDE73\uDD7E\uDD7F\uDE70\uDDE2\uDE95\uDD41\uDDEE\uDE94\uDDFE\uDE93\uDDAF\uDDF0\uDDF2\uDDEA-\uDDEC\uDE78-\uDE7A\uDE91\uDE92\uDDF4\uDDF7\uDDF9-\uDDFD\uDDEF])|[\u263A\u2639\u2620\u2763\u2764]\uFE0F?|\u270B(?:\uD83C[\uDFFB-\uDFFF])?|[\u270C\u261D](?:(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F))?|\u270A(?:\uD83C[\uDFFB-\uDFFF])?|\u270D(?:(?:\uD83C[\uDFFB-\uDFFF]|\uFE0F))?|\uD83C(?:\uDF85(?:\uD83C[\uDFFB-\uDFFF])?|\uDFC3(?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|[\uDFC7\uDFC2](?:\uD83C[\uDFFB-\uDFFF])?|\uDFCC(?:(?:\uFE0F(?:\u200D(?:[\u2642\u2640]\uFE0F?))?|\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|[\uDFC4\uDFCA](?:(?:\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|\uDFCB(?:(?:\uFE0F(?:\u200D(?:[\u2642\u2640]\uFE0F?))?|\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|[\uDFF5\uDF36\uDF7D\uDFD4-\uDFD6\uDFDC-\uDFDF\uDFDB\uDFD7\uDFD8\uDFDA\uDFD9\uDFCE\uDFCD\uDF21\uDF24-\uDF2C\uDF97\uDF9F\uDF96\uDF99-\uDF9B\uDF9E\uDFF7\uDD70\uDD71\uDD7E\uDD7F\uDE02\uDE37]\uFE0F?|\uDFF4(?:(?:\u200D\u2620\uFE0F?|\uDB40\uDC67\uDB40\uDC62\uDB40(?:\uDC65\uDB40\uDC6E\uDB40\uDC67\uDB40\uDC7F|\uDC73\uDB40\uDC63\uDB40\uDC74\uDB40\uDC7F|\uDC77\uDB40\uDC6C\uDB40\uDC73\uDB40\uDC7F)))?|\uDFF3(?:(?:\uFE0F(?:\u200D\uD83C\uDF08)?|\u200D\uD83C\uDF08))?|\uDDE6\uD83C[\uDDE8-\uDDEC\uDDEE\uDDF1\uDDF2\uDDF4\uDDF6-\uDDFA\uDDFC\uDDFD\uDDFF]|\uDDE7\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEF\uDDF1-\uDDF4\uDDF6-\uDDF9\uDDFB\uDDFC\uDDFE\uDDFF]|\uDDE8\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDEE\uDDF0-\uDDF5\uDDF7\uDDFA-\uDDFF]|\uDDE9\uD83C[\uDDEA\uDDEC\uDDEF\uDDF0\uDDF2\uDDF4\uDDFF]|\uDDEA\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDED\uDDF7-\uDDFA]|\uDDEB\uD83C[\uDDEE-\uDDF0\uDDF2\uDDF4\uDDF7]|\uDDEC\uD83C[\uDDE6\uDDE7\uDDE9-\uDDEE\uDDF1-\uDDF3\uDDF5-\uDDFA\uDDFC\uDDFE]|\uDDED\uD83C[\uDDF0\uDDF2\uDDF3\uDDF7\uDDF9\uDDFA]|\uDDEE\uD83C[\uDDE8-\uDDEA\uDDF1-\uDDF4\uDDF6-\uDDF9]|\uDDEF\uD83C[\uDDEA\uDDF2\uDDF4\uDDF5]|\uDDF0\uD83C[\uDDEA\uDDEC-\uDDEE\uDDF2\uDDF3\uDDF5\uDDF7\uDDFC\uDDFE\uDDFF]|\uDDF1\uD83C[\uDDE6-\uDDE8\uDDEE\uDDF0\uDDF7-\uDDFB\uDDFE]|\uDDF2\uD83C[\uDDE6\uDDE8-\uDDED\uDDF0-\uDDFF]|\uDDF3\uD83C[\uDDE6\uDDE8\uDDEA-\uDDEC\uDDEE\uDDF1\uDDF4\uDDF5\uDDF7\uDDFA\uDDFF]|\uDDF4\uD83C\uDDF2|\uDDF5\uD83C[\uDDE6\uDDEA-\uDDED\uDDF0-\uDDF3\uDDF7-\uDDF9\uDDFC\uDDFE]|\uDDF6\uD83C\uDDE6|\uDDF7\uD83C[\uDDEA\uDDF4\uDDF8\uDDFA\uDDFC]|\uDDF8\uD83C[\uDDE6-\uDDEA\uDDEC-\uDDF4\uDDF7-\uDDF9\uDDFB\uDDFD-\uDDFF]|\uDDF9\uD83C[\uDDE6\uDDE8\uDDE9\uDDEB-\uDDED\uDDEF-\uDDF4\uDDF7\uDDF9\uDDFB\uDDFC\uDDFF]|\uDDFA\uD83C[\uDDE6\uDDEC\uDDF2\uDDF3\uDDF8\uDDFE\uDDFF]|\uDDFB\uD83C[\uDDE6\uDDE8\uDDEA\uDDEC\uDDEE\uDDF3\uDDFA]|\uDDFC\uD83C[\uDDEB\uDDF8]|\uDDFD\uD83C\uDDF0|\uDDFE\uD83C[\uDDEA\uDDF9]|\uDDFF\uD83C[\uDDE6\uDDF2\uDDFC]|[\uDFFB-\uDFFF\uDF38-\uDF3C\uDF37\uDF31-\uDF35\uDF3E-\uDF43\uDF47-\uDF53\uDF45\uDF46\uDF3D\uDF44\uDF30\uDF5E\uDF56\uDF57\uDF54\uDF5F\uDF55\uDF2D-\uDF2F\uDF73\uDF72\uDF7F\uDF71\uDF58-\uDF5D\uDF60\uDF62-\uDF65\uDF61\uDF66-\uDF6A\uDF82\uDF70\uDF6B-\uDF6F\uDF7C\uDF75\uDF76\uDF7E\uDF77-\uDF7B\uDF74\uDFFA\uDF0D-\uDF10\uDF0B\uDFE0-\uDFE6\uDFE8-\uDFED\uDFEF\uDFF0\uDF01\uDF03-\uDF07\uDF09\uDFA0-\uDFA2\uDFAA\uDF11-\uDF20\uDF0C\uDF00\uDF08\uDF02\uDF0A\uDF83\uDF84\uDF86-\uDF8B\uDF8D-\uDF91\uDF80\uDF81\uDFAB\uDFC6\uDFC5\uDFC0\uDFD0\uDFC8\uDFC9\uDFBE\uDFB3\uDFCF\uDFD1-\uDFD3\uDFF8\uDFA3\uDFBD\uDFBF\uDFAF\uDFB1\uDFAE\uDFB0\uDFB2\uDCCF\uDC04\uDFB4\uDFAD\uDFA8\uDF92\uDFA9\uDF93\uDFBC\uDFB5\uDFB6\uDFA4\uDFA7\uDFB7-\uDFBB\uDFA5\uDFAC\uDFEE\uDFF9\uDFE7\uDFA6\uDD8E\uDD91-\uDD9A\uDE01\uDE36\uDE2F\uDE50\uDE39\uDE1A\uDE32\uDE51\uDE38\uDE34\uDE33\uDE3A\uDE35\uDFC1\uDF8C])|\u26F7\uFE0F?|\u26F9(?:(?:\uFE0F(?:\u200D(?:[\u2642\u2640]\uFE0F?))?|\uD83C(?:[\uDFFB-\uDFFF](?:\u200D(?:[\u2642\u2640]\uFE0F?))?)|\u200D(?:[\u2642\u2640]\uFE0F?)))?|[\u2618\u26F0\u26E9\u2668\u26F4\u2708\u23F1\u23F2\u2600\u2601\u26C8\u2602\u26F1\u2744\u2603\u2604\u26F8\u2660\u2665\u2666\u2663\u265F\u26D1\u260E\u2328\u2709\u270F\u2712\u2702\u26CF\u2692\u2694\u2699\u2696\u26D3\u2697\u26B0\u26B1\u26A0\u2622\u2623\u2B06\u2197\u27A1\u2198\u2B07\u2199\u2B05\u2196\u2195\u2194\u21A9\u21AA\u2934\u2935\u269B\u2721\u2638\u262F\u271D\u2626\u262A\u262E\u25B6\u23ED\u23EF\u25C0\u23EE\u23F8-\u23FA\u23CF\u2640\u2642\u2695\u267E\u267B\u269C\u2611\u2714\u2716\u303D\u2733\u2734\u2747\u203C\u2049\u3030\u00A9\u00AE\u2122]\uFE0F?|[\u0023\u002A\u0030-\u0039](?:\uFE0F\u20E3|\u20E3)|[\u2139\u24C2\u3297\u3299\u25FC\u25FB\u25AA\u25AB]\uFE0F?|[\u2615\u26EA\u26F2\u26FA\u26FD\u2693\u26F5\u231B\u23F3\u231A\u23F0\u2B50\u26C5\u2614\u26A1\u26C4\u2728\u26BD\u26BE\u26F3\u267F\u26D4\u2648-\u2653\u26CE\u23E9-\u23EC\u2B55\u2705\u274C\u274E\u2795-\u2797\u27B0\u27BF\u2753-\u2755\u2757\u26AB\u26AA\u2B1B\u2B1C\u25FE\u25FD])';
+
+            if (str.match(emojiPattern)) {
+                return true;
+            } else {
+                return false;
+            }
+
+            //var ranges = [
+            //    '(?:[\u2700-\u27bf]|(?:\ud83c[\udde6-\uddff]){2}|[\ud800-\udbff][\udc00-\udfff]|[\u0023-\u0039]\ufe0f?\u20e3|\u3299|\u3297|\u303d|\u3030|\u24c2|\ud83c[\udd70-\udd71]|\ud83c[\udd7e-\udd7f]|\ud83c\udd8e|\ud83c[\udd91-\udd9a]|\ud83c[\udde6-\uddff]|[\ud83c[\ude01-\ude02]|\ud83c\ude1a|\ud83c\ude2f|[\ud83c[\ude32-\ude3a]|[\ud83c[\ude50-\ude51]|\u203c|\u2049|[\u25aa-\u25ab]|\u25b6|\u25c0|[\u25fb-\u25fe]|\u00a9|\u00ae|\u2122|\u2139|\ud83c\udc04|[\u2600-\u26FF]|\u2b05|\u2b06|\u2b07|\u2b1b|\u2b1c|\u2b50|\u2b55|\u231a|\u231b|\u2328|\u23cf|[\u23e9-\u23f3]|[\u23f8-\u23fa]|\ud83c\udccf|\u2934|\u2935|[\u2190-\u21ff])' // U+1F680 to U+1F6FF
+            //];
+            //if (str.match(ranges.join('|'))) {
+            //    return true;
+            //} else {
+            //    return false;
+            //}
+        }
+        function isSpecialChar(string) {
+            var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+            if(format.test(string)){
+              return true;
+            } else {
+              return false;
+            }
+        }
+        $(document).ready(function () {
+            $(document).on("click", ".reviewRequest", function () {
+                $(this).parent().find(".formBox").show();
+            });
+
+            $(document).on("click", ".reviewCancel", function () {
+                $(this).parent().hide();
+            });
+
+            $(".doubtField").on('change keyup paste', function () {
+                $(this).parent().find(".doubtError").remove();
+                var doubtText = $(this).val();
+                if (typeof doubtText === 'undefined' || doubtText == "") {
+                    $("<span style='color:#FF0000' class='doubtError'>Please enter your doubt</span>").insertAfter($(this));
+                }
+
+                 var maxChar = 1000;
+                //counterBox
+                $(this).parent().find(".doubtCounter").html(doubtText.length);
+                var color = "#000000";
+                if (doubtText.length>= maxChar) {
+                    color = "#FF0000";
+                }
+                else if (doubtText.length > ((maxChar*90)/100)) {
+                    color = "#fed600";
+                }
+                else if (doubtText.length>0)
+                {
+                    color = "#207044";
+                }
+                console.log("color-", color);
+                $(this).parent().find(".counterBox").find('span').css("color", color);
+            });
+
+            $(document).on("click", ".reviewSubmit", function () {
+                var parent = $(this).parent();
+                var gParent = parent.parent();
+                var encFormData = parent.find('.doubt-form-data').val();
+
+                // var marksId = parent.attr("data-marks-id");
+                var doubtEl = parent.find(".doubtField");
+                var doubtText = doubtEl.val();
+                parent.find(".doubtError").remove();
+                var doubtTextError = 0;
+                if (typeof doubtText === 'undefined' || doubtText == "") {
+                    $("<span style='color:#FF0000' class='doubtError'>Please enter your doubt</span>").insertAfter(doubtEl);
+                    doubtTextError++;
+                }
+                if (doubtText.length>1000) {
+                    $("<span style='color:#FF0000' class='doubtError'>Sorry, maximum 1000 characters are allowed</span>").insertAfter(doubtEl);
+                    doubtTextError++;
+                }
+                if (isHTML(doubtText)) {
+                    $("<span style='color:#FF0000' class='doubtError'>Sorry, html elements not allowed.</span>").insertAfter(doubtEl);
+                    doubtTextError++;
+                }
+                if (isEmoji(doubtText)) {
+                    $("<span style='color:#FF0000' class='doubtError'>Sorry, Emojis not allowed.</span>").insertAfter(doubtEl);
+                    doubtTextError++;
+                }
+                //if (isSpecialChar(string)) {
+                //    $("<span style='color:#FF0000' class='doubtError'>Sorry, special not allowed.</span>").insertAfter(doubtEl);
+                //    doubtTextError++;
+                //}
+                //isSpecialChar(string)
+                var antyForgery = gettoken();
+                if (typeof doubtText !== 'undefined' && doubtText != "" && doubtText.length <=1000 &&
+                    encFormData !== 'undefined' && encFormData != "" && doubtTextError==0
+                ) {
+                    $.ajax({
+                        url: "/Exam/StudentDoubtSubmission",
+                        type: "POST",
+                        data: { encFormData: encFormData, doubtText: doubtText, __RequestVerificationToken: antyForgery },
+                        beforeSend: function () {
+                            $.blockUI({
+                                timeout: 0,
+                                message: '<h1><img src="/Content/Image/ajax-loader.gif" /> Processing...</h1>'
+                            });
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            $.unblockUI();
+                            if (data.hasOwnProperty("AutoLogout")) {
+                                if (data.AutoLogout == true) {
+                                    window.location.href = "/Account/Logout";
+                                }
+                            }
+                            if (data.hasOwnProperty("isSuccess")) {
+                                if (data.isSuccess == true) {
+                                    gParent.addClass("alert-success").html('<strong>Success!</strong> Your review request has been submitted.');
+                                }
+                                else {
+                                    $("<span style='color:#FF0000' class='doubtError'>" + data.message + "</span>").insertAfter(doubtEl);
+                                }
+                            }
+                        },
+                        complete: function () {
+                            $.unblockUI();
+                        },
+                        error: function (data) {
+                            console.log(data);
+                            $.unblockUI();
+                            $("<span style='color:#FF0000' class='doubtError'>Network error, Please try again.</span>").insertAfter(doubtEl);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
